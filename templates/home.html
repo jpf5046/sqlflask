@@ -1,0 +1,46 @@
+<!doctype html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>SQL Auto Generate</title>
+
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<h1>SQL Auto Generate</h1>
+
+<h2>Add the following inputs, select 'Submit' to generate a script for SQL</h2>
+<body>
+
+<div class="main">
+	<form class="pure-form" method="POST" action="/">
+	UserName:<br>
+	<input type="text" name="UserName"><br>
+	OrderID:<br>
+	<input type="number" name="OrderID"><br>
+	<button type="submit" class="pure-button pure-button-primary" value="Submit">Submit</button>
+	</form>
+</div>
+
+<br>
+
+<div class="main">
+	{% if UserName %}
+	    <p>
+        {% print('''
+        UPDATE table_name
+          SET ordercomplete = 1
+        WHERE
+          UserName = {} and OrderID = {}
+      '''.format(UserName, OrderID)) %}
+        </p>
+	{% endif %}
+</div>
+
+</body>
